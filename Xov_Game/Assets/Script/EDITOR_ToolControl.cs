@@ -5,20 +5,16 @@ using System.Collections;
 [ExecuteInEditMode]
 public class EDITOR_ToolControl : MonoBehaviour {
 
+    public GameObject tool_GridSnapper;
+    public GameObject tool_MapDataModifier;
+
     void OnEnable()
     {
-        tool_GridSnapper = GameObject.Find("TOOL_GridSnapper");
-        tool_MapDataModifier = GameObject.Find("TOOL_MapDataModifier");
-
         tool_GridSnapper.SetActive(false);
         tool_MapDataModifier.SetActive(false);
     }
 
 #if UNITY_EDITOR
-
-    GameObject tool_GridSnapper;
-    GameObject tool_MapDataModifier;
-
     public void Toogle_GridSnapper()
     {
         if (IsGridSnapperActive())
