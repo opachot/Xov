@@ -8,10 +8,14 @@ public class EDITOR_ToolControl : MonoBehaviour {
     public GameObject tool_GridSnapper;
     public GameObject tool_MapDataModifier;
 
+    public GameObject object_MapData;
+
     void OnEnable()
     {
         tool_GridSnapper.SetActive(false);
+
         tool_MapDataModifier.SetActive(false);
+        object_MapData.SetActive(false);
     }
 
 #if UNITY_EDITOR
@@ -26,9 +30,15 @@ public class EDITOR_ToolControl : MonoBehaviour {
     public void Toogle_MapDataModifier()
     {
         if (IsMapDataModifierActive())
+        {
             tool_MapDataModifier.SetActive(false);
+            object_MapData.SetActive(false);
+        }   
         else
+        {
             tool_MapDataModifier.SetActive(true);
+            object_MapData.SetActive(true);
+        }   
     }
 
     #region GETTER

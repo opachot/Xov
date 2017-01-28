@@ -20,7 +20,7 @@ public class MapDataParser : MonoBehaviour {
     List<GameObject> allDataTile = new List<GameObject>();
     private int[,] MapData = new int[MAP_SQR_SIZE, MAP_SQR_SIZE];
 
-    private GameObject object_MapData;
+    public GameObject object_MapData;
 
     // PUBLIC
 
@@ -29,7 +29,6 @@ public class MapDataParser : MonoBehaviour {
     #region UNITY METHODE
     void Start ()
     {
-        object_MapData = GameObject.Find("MapData");
         ListingAllTile();
 
         ForLoopingInMap();
@@ -37,6 +36,11 @@ public class MapDataParser : MonoBehaviour {
         RemoveMapDataVisualy();
     }
     #endregion
+
+    private void PlaceMapDataVisualy()
+    {
+        object_MapData.SetActive(true);
+    }
 
     private void ListingAllTile()
     {
