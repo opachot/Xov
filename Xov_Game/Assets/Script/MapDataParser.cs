@@ -99,11 +99,20 @@ public class MapDataParser : MonoBehaviour {
     private void SavaMapDataInIndex(int tileIndex, int dataIndexX, int dataIndexY)
     {
         if (allDataTile[tileIndex].CompareTag("WALKABLE"))
+        {
+            print("WALKABLE");
             MapData[dataIndexY, dataIndexX] = WALKABLE;
+        }
         else if (allDataTile[tileIndex].CompareTag("HOLE"))
+        {
+            print("HOLE");
             MapData[dataIndexY, dataIndexX] = HOLE;
+        }
         else if (allDataTile[tileIndex].CompareTag("OBSTACLE"))
+        {
+            print("OBSTACLE");
             MapData[dataIndexY, dataIndexX] = OBSTACLE;
+        }
         else
         {
             // Place an obstacle if an error happen...
