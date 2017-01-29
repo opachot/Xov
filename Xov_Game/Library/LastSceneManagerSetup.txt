@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/_Scene/Xov_Map1.unity
+- path: Assets/_Scene/Castle_Wall.unity
   isLoaded: 1
   isActive: 1
