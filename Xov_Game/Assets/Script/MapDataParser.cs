@@ -6,6 +6,8 @@ public class MapDataParser : MonoBehaviour {
 
     #region DECLARATION
     // CONST
+    private Vector2 NO_INDEX_FOUND = new Vector2(-666, -666);
+
     private const int MAP_SQR_SIZE = 25;
 
     private const int STARTING_POS = 12;
@@ -18,7 +20,8 @@ public class MapDataParser : MonoBehaviour {
 
     // PRIVATE
     List<GameObject> allDataTile = new List<GameObject>();
-    private int[,] MapData = new int[MAP_SQR_SIZE, MAP_SQR_SIZE];
+    private int[,] mapData = new int[MAP_SQR_SIZE, MAP_SQR_SIZE];
+    private GameObject[,] mapTile = new GameObject[MAP_SQR_SIZE, MAP_SQR_SIZE];
 
     public GameObject object_MapData;
 
@@ -90,7 +93,7 @@ public class MapDataParser : MonoBehaviour {
         {
             if (IsTileMatchingPosition(allDataTile[i], searchingPosX, searchingPosY))
             {
-                SavaMapDataInIndex(i, indexX, indexY);
+                SaveMapInArrays(i, indexX, indexY);
                 RemoveTileFromList(i);
 
                 // Get out of the Tile Searching forloop.
@@ -108,35 +111,68 @@ public class MapDataParser : MonoBehaviour {
         return isTileMatchingPosition;
     }
 
-    private void SavaMapDataInIndex(int tileIndex, int dataIndexX, int dataIndexY)
+    private void SaveMapInArrays(int tileIndex, int dataIndexX, int dataIndexY)
     {
         if (allDataTile[tileIndex].CompareTag("WALKABLE"))
         {
             print("WALKABLE");
-            MapData[dataIndexY, dataIndexX] = WALKABLE;
+            mapData[dataIndexY, dataIndexX] = WALKABLE;
         }
         else if (allDataTile[tileIndex].CompareTag("HOLE"))
         {
             print("HOLE");
-            MapData[dataIndexY, dataIndexX] = HOLE;
+            mapData[dataIndexY, dataIndexX] = HOLE;
         }
         else if (allDataTile[tileIndex].CompareTag("OBSTACLE"))
         {
             print("OBSTACLE");
-            MapData[dataIndexY, dataIndexX] = OBSTACLE;
+            mapData[dataIndexY, dataIndexX] = OBSTACLE;
         }
         else
         {
             // Place an obstacle if an error happen...
             Debug.Log("ERROR while parsing the map data in MapDataParser script: TAG NOT FOUND");
-            MapData[dataIndexY, dataIndexX] = OBSTACLE;
+            mapData[dataIndexY, dataIndexX] = OBSTACLE;
         }
+
+        mapTile[dataIndexY, dataIndexX] = allDataTile[tileIndex];
     }
 
     private void RemoveTileFromList(int index)
     {
         allDataTile.RemoveAt(index);
         allDataTile.TrimExcess();
+    }
+
+
+    public int[,] Get_MapData()
+    {
+        return mapData;
+    }
+
+    public GameObject[,] Get_MapTile()
+    {
+        return mapTile;
+    }
+
+    public Vector2 Get_IndexFromTilePosition(Vector2 tilePos)
+    {
+        for (int y = 0; y < MAP_SQR_SIZE; y++)
+        {
+            for (int x = 0; x < MAP_SQR_SIZE; x++)
+            {
+                Vector2 testedTilePos = new Vector2(mapTile[y, x].transform.position.x, mapTile[y, x].transform.position.y);
+
+                if (testedTilePos == tilePos)
+                {
+                    Vector2 tileIndex = new Vector2(y, x);
+                    return tileIndex;
+                }
+            }
+        }
+
+        Debug.Log("ERROR: No index found in Get_IndexFromTilePosition() in MapDataParser");
+        return NO_INDEX_FOUND;
     }
 
 }

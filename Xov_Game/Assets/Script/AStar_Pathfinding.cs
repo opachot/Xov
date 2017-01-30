@@ -3,55 +3,36 @@ using System.Collections;
 
 public class AStar_Pathfinding : MonoBehaviour {
 
-    private Vector2 startingIndex = new Vector2(1, 12);
-    private Vector2 endingIndex;
+    #region DELCARATION
+    // CONST
 
-    //RaycastHit2D hit;
-    RaycastHit2D[] hits;
+    // PRIVATE
+    private MapDataParser mapData;
 
-    void Start ()
+    // PUBLIC
+
+    #endregion
+
+    #region UNITY METHODE
+    void Awake ()
     {
-	
-	}
+        mapData = gameObject.GetComponent<MapDataParser>();
+    }
+    #endregion
 
-	void Update ()
+    public void FindPath(Vector2 StartingIndex, Vector2 EndingIndex)
     {
+        // SEARCH PATHFINDING HERE
+        print("Code Pathfinding You Lazy Ass!");
 
-        //hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        //if (hit.collider != null)
-        //{
-        //    if (Input.GetMouseButtonDown(0))
-        //    {
-        //        endingIndex = hit.transform.position;
-        //        
-        //        // SEARCH PATHFINDING HERE?
-        //        print(endingIndex);
-        //
-        //    }
-        //}
+        // Do nothing if the same index.
+        if (StartingIndex == EndingIndex)
+            return;
 
-        hits = Physics2D.RaycastAll(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-        if (hits.Length != 0)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                // Find closess layer collider.
-                GameObject wantedTile = hits[0].collider.gameObject;
-                int layer = hits[0].collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
 
-                for (int i = 1; i < hits.Length; i++)
-                {
-                    if (hits[i].collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder > layer)
-                        wantedTile = hits[i].collider.gameObject;
-                }
 
-                endingIndex = wantedTile.transform.position;
-                print(endingIndex);
 
-                // SEARCH PATHFINDING HERE?
 
-            }
-        }
 
 
 
