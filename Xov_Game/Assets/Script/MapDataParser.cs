@@ -27,13 +27,15 @@ public class MapDataParser : MonoBehaviour {
     #endregion
 
     #region UNITY METHODE
-    void Start ()
+    void Awake ()
     {
+        PlaceMapDataVisualy();
+
         ListingAllTile();
 
         ForLoopingInMap();
 
-        RemoveMapDataVisualy();
+        TurnTileInvisible();
     }
     #endregion
 
@@ -46,6 +48,16 @@ public class MapDataParser : MonoBehaviour {
     {
         foreach (Transform t in object_MapData.transform)
             allDataTile.Add(t.gameObject);
+    }
+
+    private void TurnTileInvisible()
+    {
+        foreach (Transform t in object_MapData.transform)
+        {
+            SpriteRenderer tileRenderer = t.gameObject.GetComponent<SpriteRenderer>();
+            Color tileColor = tileRenderer.color;
+            tileRenderer.color = new Color(tileColor.r, tileColor.g, tileColor.b, 0);
+        }
     }
 
 
@@ -125,12 +137,6 @@ public class MapDataParser : MonoBehaviour {
     {
         allDataTile.RemoveAt(index);
         allDataTile.TrimExcess();
-    }
-
-
-    private void RemoveMapDataVisualy()
-    {
-        object_MapData.SetActive(false);
     }
 
 }
