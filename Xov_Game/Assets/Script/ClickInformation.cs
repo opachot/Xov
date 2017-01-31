@@ -34,7 +34,10 @@ public class ClickInformation : MonoBehaviour {
                 for (int i = 1; i < hits.Length; i++)
                 {
                     if (hits[i].collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder > layer)
+                    {
                         wantedTile = hits[i].collider.gameObject;
+                        layer = hits[i].collider.gameObject.GetComponent<SpriteRenderer>().sortingOrder;
+                    } 
                 }
 
                 return wantedTile.transform.position;

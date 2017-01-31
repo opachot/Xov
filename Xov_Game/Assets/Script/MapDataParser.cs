@@ -38,7 +38,7 @@ public class MapDataParser : MonoBehaviour {
 
         ForLoopingInMap();
 
-        TurnTileInvisible();
+        //TurnTileInvisible();
     }
     #endregion
 
