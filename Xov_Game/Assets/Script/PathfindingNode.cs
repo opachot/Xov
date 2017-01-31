@@ -10,6 +10,7 @@ public class PathfindingNode : MonoBehaviour {
 
     // PUBLIC
     public int manhattanDistance;
+    public int id;
 
     public int movingCost;
     public int combinedValue;
