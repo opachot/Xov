@@ -165,7 +165,7 @@ public class MapDataParser : MonoBehaviour {
 
                 if (testedTilePos == tilePos)
                 {
-                    Vector2 tileIndex = new Vector2(y, x);
+                    Vector2 tileIndex = new Vector2(x, y);
                     return tileIndex;
                 }
             }

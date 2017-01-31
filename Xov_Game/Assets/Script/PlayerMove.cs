@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour {
     private ClickInformation clickInfo;
     private AStar_Pathfinding aStar_Pathfinding;
 
-    private Vector2 startingIndex = new Vector2(1, 12);
+    private Vector2 startingIndex = new Vector2(12, 1);
     private Vector2 endingIndex;
 
     // PUBLIC
